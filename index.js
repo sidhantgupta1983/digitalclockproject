@@ -34,7 +34,7 @@ function intoAction(){
     muhurt3 = `'${muhurt3}'`;
     console.log(valued3, muhurt3);
 
-    // console.log(text3);
+    console.log(text3);
     var idExist = document.getElementById("wakeUpTimeText");
     if(idExist){
         idExist.innerHTML = `Wake Up Time : ${text1} <br> Lunch Time : ${text2}<br> Nap Time : ${text3}`;
@@ -50,8 +50,13 @@ function intoAction(){
     var hours = rTClock.getHours();
     var mins = rTClock.getMinutes();
     var secs = rTClock.getSeconds();
-    // var hours = 1;
-    // var amPm = "AM";
+    document.getElementById("clock-hours").innerHTML = hours ;
+    document.getElementById("clock-mins").innerHTML = mins ;
+    document.getElementById("clock-secs").innerHTML = secs ;
+    var t = setTimeout(intoAction,1000); 
+
+    // var hours = 6;
+    // var amPm = "PM";
     var amPm = (hours < 12) ? "AM" : "PM";
     hours = (hours > 12) ? hours-12 : hours;
     var amPms = amPm;
@@ -65,10 +70,10 @@ function intoAction(){
         document.getElementById("changeimage").innerHTML = 
         `<img src="./BREAKFAST.jpg" alt="" srcset="" id="changeimage">`;
         document.getElementById("lunchtimequote").innerHTML = "Grab some Healthy BreakFast!!!"
-
     }
     else if ((valued2 == hours) && (muhurt2 == amPms)){
-        document.getElementById("noonmsg").innerHTML = "GOOD AFTERRNOON!!! TAKE SOME SLEEP..";
+        document.getElementById("noonmsg").style.fontSize = "22px";
+        document.getElementById("noonmsg").innerHTML = "GOOD AFTERNOON!!! TAKE SOME SLEEP..";
         document.getElementById("lunchtimequote").innerHTML = "Go get some Lunch!!!"
         document.getElementById("changeimage").innerHTML = 
         `<img src="./lunch_image.svg" alt="" srcset="" id="changeimage">`;
@@ -76,7 +81,7 @@ function intoAction(){
     else if((valued3 == hours) && (muhurt3 == amPms)){
         document.getElementById("noonmsg").innerHTML = "GOOD NIGHT!!! SLEEP TIGHT...";
         document.getElementById("changeimage").innerHTML = 
-        `<img src="./BREAKFAST.jpg" alt="" srcset="" id="changeimage">`;
+        `<img src="./Dinner.jpg" alt="" srcset="" id="changeimage">`;
         document.getElementById("lunchtimequote").innerHTML = "Finish your dinner and Go to Bed!!";   
     }
     else{
@@ -90,8 +95,9 @@ function realTime(){
         var hours = rTClock.getHours();
         var mins = rTClock.getMinutes();
         var secs = rTClock.getSeconds();
-        // var hours = 9;
-        // var amPm = "AM";
+        // var hours = 7;
+        // var amPm = "PM";
+        // console.log(hours);
         var amPm = (hours < 12) ? "AM" : "PM";
         hours = (hours > 12) ? hours-12 : hours;
 
@@ -113,8 +119,14 @@ function realTime(){
             document.getElementById("lunchtimequote").innerHTML = "Grab some Healthy BreakFast!!!"
 
         }
+        else if((hours >= 0) && (amPm == "AM") || (hours < 5)){
+            document.getElementById("noonmsg").innerHTML = "GOOD NIGHT!!! SLEEP TIGHT...";
+            document.getElementById("changeimage").innerHTML = 
+            `<img src="./Dinner.jpg" alt="" srcset="" id="changeimage">`;
+            document.getElementById("lunchtimequote").innerHTML = "Finish your dinner and Go to Bed!!";
+        }
         else if((hours >= 12) && (amPm == "PM") || (hours < 5) ){
-            document.getElementById("noonmsg").innerHTML = "GOOD AFTERRNOON!!! TAKE SOME REST...";
+            document.getElementById("noonmsg").innerHTML = "GOOD AFTERNOON!!! TAKE SOME REST...";
             document.getElementById("noonmsg").style.fontSize = "22px"
             document.getElementById("lunchtimequote").innerHTML = "Go get some Lunch!!!"
             document.getElementById("changeimage").innerHTML = 
@@ -127,11 +139,9 @@ function realTime(){
             document.getElementById("lunchtimequote").innerHTML = "Stop Yawning, get some tea..Its Just Evening!"
             document.getElementById("lunchtimequote").style.fontSize = "24px"
         }
+        
         else{
-            document.getElementById("noonmsg").innerHTML = "GOOD NIGHT!!! SLEEP TIGHT...";
-            document.getElementById("changeimage").innerHTML = 
-            `<img src="./Dinner.jpg" alt="" srcset="" id="changeimage">`;
-            document.getElementById("lunchtimequote").innerHTML = "Finish your dinner and Go to Bed!!";
+            console.log("nothing");
         }
     }
 }
